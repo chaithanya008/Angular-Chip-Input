@@ -1,4 +1,4 @@
-import { Component, ElementRef, forwardRef } from '@angular/core';
+import { Component, ElementRef, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -17,6 +17,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class ChipsComponent implements ControlValueAccessor {
 
   public constructor(private elementRef: ElementRef) {}
+
+  @Input()
+  public items: Array<string> = [];
 
   //ControlValueAccessor methods
   public onChange: any;
@@ -38,29 +41,6 @@ export class ChipsComponent implements ControlValueAccessor {
       this.onChange(value);
     }
   }
-
-  public items: Array<string> = [
-    "Java",
-    "JavaScript",
-    "C",
-    "C++",
-    "Python",
-    "PHP",
-    "Go",
-    "Swift",
-    "Pascal",
-    "Matlab",
-    "C#",
-    "R",
-    "TypeScript",
-    "Pico",
-    "Python",
-    "Basic",
-    "Ruby",
-    "Sql",
-    "Assembly language",
-    "Sml",
-  ];
 
   public searchText: string = "";
   public searchResults: Array<string> = [];

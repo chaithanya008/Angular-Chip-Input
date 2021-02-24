@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { ChipsModule } from 'src/components/chips/chips.module';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ProgrammingLanguagesProvider } from 'src/assets/programming-languages.provider';
 
 @NgModule({
   declarations: [
@@ -17,8 +19,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     ChipsModule,
     ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ProgrammingLanguagesProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
