@@ -12,7 +12,7 @@ export class AppComponent {
   public constructor(
     fb: FormBuilder) {
       this.form = fb.group({
-        chips: []
+        chips: fb.array([])
       });
     }
 
