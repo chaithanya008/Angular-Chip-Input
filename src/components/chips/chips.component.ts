@@ -127,7 +127,9 @@ export class ChipsComponent implements ControlValueAccessor {
   public addCurrentItem(): void {
     if (this.focusElement >= 0) {
       const currrentItem: string = this.searchResults[this.focusElement];
-      this.addItem(currrentItem);
+      if (currrentItem) {
+        this.addItem(currrentItem);
+      }
     }
   }
 

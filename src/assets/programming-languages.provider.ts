@@ -20,5 +20,6 @@ export class ProgrammingLanguagesProvider {
     'Sql',
     'Assembly',
     'Sml',
+    'fortran',
   ];
 }

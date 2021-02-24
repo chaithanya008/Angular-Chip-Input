@@ -20,16 +20,16 @@ export class AppComponent implements OnInit {
     private dataProvider: ProgrammingLanguagesProvider
   ) {
     // get items from data provider
-    this.items = this.dataProvider.programmingLanguages;
+    // this.items = this.dataProvider.programmingLanguages;
 
     this.formControl = new FormControl([]);
   }
 
   public ngOnInit(): void {
     // get items from json file
-    // this.httpClient
-    //   .get<any>("assets/programming-languages.json")
-    //   .subscribe(data => (this.items = data.languages));
+    this.httpClient
+      .get<any>('assets/programming-languages.json')
+      .subscribe((data) => (this.items = data.languages));
   }
 
   public setSelectedItems(selectedItems: Array<string>): void {
