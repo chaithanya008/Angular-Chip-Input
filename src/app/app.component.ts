@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  public constructor(private elementRef: ElementRef) {}
 
   public items: Array<string> = [
     "Java",
@@ -58,6 +60,7 @@ export class AppComponent {
     if (index === -1) {
       this.selectedItems.push(value);
       this.reset();
+      this.focusInput();
     }
   }
 
@@ -67,6 +70,7 @@ export class AppComponent {
     );
     if (index !== -1) {
       this.selectedItems.splice(index, 1);
+      this.focusInput();
     }
   }
 
@@ -75,6 +79,16 @@ export class AppComponent {
       (x: string) =>
         x.toLowerCase().startsWith(this.searchText.toLowerCase())
     );
+  }
+
+  // to focus the search input
+  private focusInput(): void {
+    const inputData: any = this.elementRef.nativeElement.querySelector(
+      ".search-input__data"
+    );
+    if (inputData) {
+      inputData.focus();
+    }
   }
 
   // clear character(s) after selection

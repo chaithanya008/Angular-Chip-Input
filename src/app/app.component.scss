@@ -27,11 +27,21 @@
 .selected-item {
   display: flex;
   align-items: center;
+  min-width: 40px;
+  max-width: 150px;
+  height: 25px;
+  color: black;
+  background-color: #c8c8c8;
+  padding: 4px 8px;
+  margin: 4px;
+  border-radius: 4px;
   overflow: hidden;
 
   // child of selected-item
   &__data {
+    height: 26px;
     font-size: 16px;
+    line-height: 26px;
   }
 
   &__icon {
