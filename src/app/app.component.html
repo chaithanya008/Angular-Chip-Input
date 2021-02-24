@@ -1,5 +1,10 @@
 <div class="search">
   <div class="search-query">
+    <div class="selected-item" *ngFor="let item of selectedItems">
+      <div class="selected-item__data">
+        {{ item }}
+      </div>
+    </div>
     <div class="search-input">
       <input
         type="text"
@@ -12,7 +17,11 @@
 
   <!-- suggestion element -->
   <div *ngIf="searchResults.length > 0" class="search__panel">
-    <div *ngFor="let item of searchResults" class="result-item">
+    <div
+      *ngFor="let item of searchResults"
+      class="result-item"
+      (click)="addItem(item)"
+    >
       {{ item }}
     </div>
   </div>

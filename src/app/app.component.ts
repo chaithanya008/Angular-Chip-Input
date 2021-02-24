@@ -18,6 +18,7 @@ export class AppComponent {
 
   public searchText: string = "";
   public searchResults: Array<string> = [];
+  public selectedItems: Array<string> = [];
 
   public get searchPlaceholder(): string {
     return this.searchText ? "" : "Type a Programming Language";
@@ -33,6 +34,15 @@ export class AppComponent {
       this.querySearchResults();
     } else {
       this.searchResults = [];
+    }
+  }
+
+  public addItem(value: string): void {
+    const index: number = this.selectedItems.findIndex(
+      (x: string) => x === value
+    );
+    if (index === -1) {
+      this.selectedItems.push(value);
     }
   }
 
