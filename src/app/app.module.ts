@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { ChipsModule } from 'src/components/chips/chips.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -11,8 +12,9 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
-    FormsModule
+    ChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

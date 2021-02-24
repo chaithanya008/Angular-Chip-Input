@@ -1,0 +1,41 @@
+<div class="search">
+  <div class="search-query">
+    <div class="selected-item" *ngFor="let item of selectedItems">
+      <div class="selected-item__data">
+        {{ item }}
+      </div>
+      <!-- click to remove -->
+      <div class="selected-item__icon" (click)="removeItem(item)">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="100%"
+          height="100%"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M13.41 12l6.31-6.31a1 1 0 1 0-1.41-1.41L12 10.57l-6.31-6.3a1 1 0 1 0-1.41 1.41L10.59 12l-6.31 6.3a1 1 0 1 0 1.41 1.4L12 13.4l6.31 6.3a1 1 0 1 0 1.41-1.41z"
+          ></path>
+        </svg>
+      </div>
+    </div>
+    <div class="search-input">
+      <input
+        type="text"
+        class="search-input__data"
+        [(ngModel)]="searchQuery"
+        [placeholder]="searchPlaceholder"
+      />
+    </div>
+  </div>
+
+  <!-- suggestion element -->
+  <div *ngIf="searchResults.length > 0" class="search__panel">
+    <div
+      *ngFor="let item of searchResults"
+      class="result-item"
+      (click)="addItem(item)"
+    >
+      {{ item }}
+    </div>
+  </div>
+</div>
