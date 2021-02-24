@@ -13,7 +13,21 @@ export class AppComponent {
     "C",
     "C++",
     "Python",
-    "PHP"
+    "PHP",
+    "Go",
+    "Swift",
+    "Pascal",
+    "Matlab",
+    "C#",
+    "R",
+    "TypeScript",
+    "Pico",
+    "Python",
+    "Basic",
+    "Ruby",
+    "Sql",
+    "Assembly language",
+    "Sml",
   ];
 
   public searchText: string = "";
@@ -43,6 +57,16 @@ export class AppComponent {
     );
     if (index === -1) {
       this.selectedItems.push(value);
+      this.reset();
+    }
+  }
+
+  public removeItem(value: string): void {
+    const index: number = this.selectedItems.findIndex(
+      (x: string) => x === value
+    );
+    if (index !== -1) {
+      this.selectedItems.splice(index, 1);
     }
   }
 
@@ -51,6 +75,12 @@ export class AppComponent {
       (x: string) =>
         x.toLowerCase().startsWith(this.searchText.toLowerCase())
     );
+  }
+
+  // clear character(s) after selection
+  private reset(): void {
+    this.searchQuery = "";
+    this.searchResults = [];
   }
 
 }
