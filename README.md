@@ -2,6 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.13.
 
+## Prerequisites: 
+Install angular cli, NodeJS and NPM
+
+1. git clone https-link-of-this-repository
+2. cd into the directory in command line
+3. run --> npm install 
+4. serve the project using -> ng serve --open
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
