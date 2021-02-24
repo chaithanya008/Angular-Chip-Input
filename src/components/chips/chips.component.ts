@@ -27,12 +27,15 @@ import {
 export class ChipsComponent implements ControlValueAccessor {
   public constructor(private elementRef: ElementRef) {}
 
+  // receiving items as an input from parent component.
   @Input()
   public items: Array<string> = [];
+
   @Input()
   public formControl: FormControl;
 
-  // output to execute from the component, whenever there is an update in selected items
+  // output to execute from the component, whenever there is
+  // an update in selected items.
   @Output()
   public selectedItemsChange: EventEmitter<Array<string>> = new EventEmitter<
     Array<string>

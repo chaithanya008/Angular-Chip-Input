@@ -34,7 +34,9 @@ export class AppComponent implements OnInit {
 
   public setSelectedItems(selectedItems: Array<string>): void {
     this.selectedItems = selectedItems;
-    // current output value of selected items
+    // current output value of
+    // items
+
     console.log(this.selectedItems.join(', '));
   }
 }
