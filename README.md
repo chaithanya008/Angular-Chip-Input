@@ -3,8 +3,9 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.13.
 
 ## Prerequisites: 
-Install angular cli, NodeJS and NPM
+Install [NodeJS](https://nodejs.org/en/download/),  NPM(https://www.npmjs.com/get-npm)
 
+## Steps to run the project
 1. git clone https-link-of-this-repository
 2. cd into the directory in command line
 3. run --> npm install 
