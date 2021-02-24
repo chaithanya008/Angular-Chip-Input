@@ -13,20 +13,20 @@ import {
 } from '@angular/forms';
 
 @Component({
-  selector: 'app-chips',
-  templateUrl: './chips.component.html',
-  styleUrls: ['./chips.component.scss'],
+  selector: 'chip-input',
+  templateUrl: './chipinput.component.html',
+  styleUrls: ['./chipinput.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ChipsComponent),
+      useExisting: forwardRef(() => Chipsinput),
       multi: true,
     },
   ],
 })
 
 // implements controlValueAccessor
-export class ChipsComponent implements ControlValueAccessor {
+export class Chipsinput implements ControlValueAccessor {
   public constructor(private elementRef: ElementRef) {}
 
   // receiving items as an input from parent component.
