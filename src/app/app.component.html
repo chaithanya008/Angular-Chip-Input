@@ -1,3 +1,13 @@
 <form [formGroup]="form">
-  <app-chips [items]="items" formControlName="chips"></app-chips>
+  <app-chips
+    [items]="items"
+    formControlName="chips"
+    (selectedItemsChange)="setSelectedItems($event)"
+  ></app-chips>
+
+  <div formArrayName="chips">
+    <div *ngFor="let item of chips.controls">
+      {{ item }}
+    </div>
+  </div>
 </form>

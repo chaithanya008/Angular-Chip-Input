@@ -1,4 +1,11 @@
-import { Component, ElementRef, forwardRef, Input } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -7,19 +14,23 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   styleUrls: ['./chips.component.scss'],
   providers: [
     {
-      
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => ChipsComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class ChipsComponent implements ControlValueAccessor {
-
   public constructor(private elementRef: ElementRef) {}
 
   @Input()
   public items: Array<string> = [];
+
+  // output to execute from the component, whenever there is an update in selected items
+  @Output()
+  public selectedItemsChange: EventEmitter<Array<string>> = new EventEmitter<
+    Array<string>
+  >();
 
   //ControlValueAccessor methods
   public onChange: any;
@@ -42,7 +53,7 @@ export class ChipsComponent implements ControlValueAccessor {
     }
   }
 
-  public searchText: string = "";
+  public searchText: string = '';
   public searchResults: Array<string> = [];
   public selectedItems: Array<string> = [];
 
@@ -51,9 +62,9 @@ export class ChipsComponent implements ControlValueAccessor {
   public focusElement: number = -1;
 
   public get searchPlaceholder(): string {
-    return this.searchText ? "" : "Type a Programming Language";
+    return this.searchText ? '' : 'Type a Programming Language';
   }
-  
+
   public get searchQuery(): string {
     return this.searchText;
   }
@@ -73,6 +84,7 @@ export class ChipsComponent implements ControlValueAccessor {
     );
     if (index === -1) {
       this.selectedItems.push(value);
+      this.emitSelectedItems();
       this.reset();
       this.focusInput();
     }
@@ -84,20 +96,21 @@ export class ChipsComponent implements ControlValueAccessor {
     );
     if (index !== -1) {
       this.selectedItems.splice(index, 1);
+      this.emitSelectedItems();
       this.focusInput();
     }
   }
-  
-/////////////////////////
-//////
-// functions for keyboard interactions
-//////
-/////////////////////////
+
+  /////////////////////////
+  //////
+  // functions for keyboard interactions
+  //////
+  /////////////////////////
 
   public onLocationFocus(): void {
     this.focusElement = 0;
   }
-  
+
   public onLocationBlur(): void {
     this.focusElement = -1;
   }
@@ -114,7 +127,7 @@ export class ChipsComponent implements ControlValueAccessor {
       this.focusElement++;
     } else {
       // set focus to the first element upon reaching the end
-      this.focusElement = 0; 
+      this.focusElement = 0;
     }
   }
 
@@ -128,6 +141,7 @@ export class ChipsComponent implements ControlValueAccessor {
   public removeLastItem(): void {
     if (!this.searchText) {
       this.selectedItems.splice(-1, 1);
+      this.emitSelectedItems();
       this.focusInput();
     }
   }
@@ -135,9 +149,8 @@ export class ChipsComponent implements ControlValueAccessor {
   private querySearchResults(): void {
     this.searchResults = this.items.filter(
       (x: string) =>
-        x.toLowerCase().startsWith(this.searchText.toLowerCase())
+        x.toLowerCase().startsWith(this.searchText.toLowerCase()) &&
         // to exclude added results
-        &&
         !this.selectedItems.includes(x)
     );
   }
@@ -145,7 +158,7 @@ export class ChipsComponent implements ControlValueAccessor {
   // to focus the search input
   private focusInput(): void {
     const inputData: any = this.elementRef.nativeElement.querySelector(
-      ".search-input__data"
+      '.search-input__data'
     );
     if (inputData) {
       inputData.focus();
@@ -154,8 +167,12 @@ export class ChipsComponent implements ControlValueAccessor {
 
   // clear character(s) after selection
   private reset(): void {
-    this.searchQuery = "";
+    this.searchQuery = '';
     this.searchResults = [];
   }
 
+  private emitSelectedItems(): void {
+    // emit selected items to the parent component
+    this.selectedItemsChange.emit(this.selectedItems);
+  }
 }
