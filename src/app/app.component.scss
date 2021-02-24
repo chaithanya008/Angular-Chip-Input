@@ -1,0 +1,27 @@
+.search-query {
+  display: flex;
+  flex: 1;
+  height: 40px;
+  align-items: center;
+  border: 1px solid #dce0e5;
+  background-color: #ffffff;
+}
+
+.search-input {
+  position: relative;
+  display: flex;
+  flex: 1;
+  padding: 0 8px;
+
+  // child of search-input
+  &__data {
+    flex: 1;
+    width: 100%;
+    min-width: 0 !important;
+    height: 38px;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+  }
+}

@@ -6,5 +6,28 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'chip-clinomic-task';
+
+  public items: Array<string> = [
+    "Java",
+    "JavaScript",
+    "C",
+    "C++",
+    "Python",
+    "PHP"
+  ];
+
+  public searchTerm: string = "";
+
+  public get searchPlaceholder(): string {
+    return this.searchTerm ? "" : "Type a Programming Language";
+  }
+  
+  public get searchQuery(): string {
+    return this.searchTerm;
+  }
+
+  public set searchQuery(updatedString: string) {
+    this.searchTerm = updatedString;
+  }
+
 }
