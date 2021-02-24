@@ -1,10 +1,19 @@
-<div class="search-query">
-  <div class="search-input">
-    <input
-      type="text"
-      class="search-input__data"
-      [(ngModel)]="searchQuery"
-      [placeholder]="searchPlaceholder"
-    />
+<div class="search">
+  <div class="search-query">
+    <div class="search-input">
+      <input
+        type="text"
+        class="search-input__data"
+        [(ngModel)]="searchQuery"
+        [placeholder]="searchPlaceholder"
+      />
+    </div>
+  </div>
+
+  <!-- suggestion element -->
+  <div *ngIf="searchResults.length > 0" class="search__panel">
+    <div *ngFor="let item of searchResults" class="result-item">
+      {{ item }}
+    </div>
   </div>
 </div>

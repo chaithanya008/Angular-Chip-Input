@@ -16,18 +16,31 @@ export class AppComponent {
     "PHP"
   ];
 
-  public searchTerm: string = "";
+  public searchText: string = "";
+  public searchResults: Array<string> = [];
 
   public get searchPlaceholder(): string {
-    return this.searchTerm ? "" : "Type a Programming Language";
+    return this.searchText ? "" : "Type a Programming Language";
   }
   
   public get searchQuery(): string {
-    return this.searchTerm;
+    return this.searchText;
   }
 
   public set searchQuery(updatedString: string) {
-    this.searchTerm = updatedString;
+    this.searchText = updatedString;
+    if (this.searchText.length > 0) {
+      this.querySearchResults();
+    } else {
+      this.searchResults = [];
+    }
+  }
+
+  private querySearchResults(): void {
+    this.searchResults = this.items.filter(
+      (x: string) =>
+        x.toLowerCase().startsWith(this.searchText.toLowerCase())
+    );
   }
 
 }
