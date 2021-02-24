@@ -24,6 +24,8 @@ import {
     },
   ],
 })
+
+// implements controlValueAccessor
 export class ChipsComponent implements ControlValueAccessor {
   public constructor(private elementRef: ElementRef) {}
 
