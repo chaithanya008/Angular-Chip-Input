@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ProgrammingLanguagesProvider } from 'src/assets/programming-languages.provider';
 
@@ -9,7 +9,7 @@ import { ProgrammingLanguagesProvider } from 'src/assets/programming-languages.p
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  public form: FormGroup;
+  public formControl: FormControl;
   public items: Array<string>;
 
   public selectedItems: Array<string> = [];
@@ -22,9 +22,7 @@ export class AppComponent implements OnInit {
     // get items from data provider
     this.items = this.dataProvider.programmingLanguages;
 
-    this.form = fb.group({
-      chips: fb.array([]),
-    });
+    this.formControl = new FormControl([]);
   }
 
   public ngOnInit(): void {
@@ -32,10 +30,6 @@ export class AppComponent implements OnInit {
     // this.httpClient
     //   .get<any>("assets/programming-languages.json")
     //   .subscribe(data => (this.items = data.languages));
-  }
-
-  public get chips(): FormArray {
-    return this.form.get('chips') as FormArray;
   }
 
   public setSelectedItems(selectedItems: Array<string>): void {

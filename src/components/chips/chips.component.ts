@@ -6,7 +6,11 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-chips',
@@ -25,6 +29,8 @@ export class ChipsComponent implements ControlValueAccessor {
 
   @Input()
   public items: Array<string> = [];
+  @Input()
+  public formControl: FormControl;
 
   // output to execute from the component, whenever there is an update in selected items
   @Output()
@@ -38,20 +44,7 @@ export class ChipsComponent implements ControlValueAccessor {
     this.onChange = fn;
   }
   public registerOnTouched(fn: any): void {}
-  public writeValue(value: Array<string>): void {
-    this.values = value;
-  }
-
-  public get values(): Array<string> {
-    return this.selectedItems;
-  }
-
-  public set values(value: Array<string>) {
-    this.selectedItems = value;
-    if (this.onChange) {
-      this.onChange(value);
-    }
-  }
+  public writeValue(value: Array<string>): void {}
 
   public searchText: string = '';
   public searchResults: Array<string> = [];
@@ -172,6 +165,7 @@ export class ChipsComponent implements ControlValueAccessor {
   }
 
   private emitSelectedItems(): void {
+    this.formControl.setValue(this.selectedItems.join(', '));
     // emit selected items to the parent component
     this.selectedItemsChange.emit(this.selectedItems);
   }
