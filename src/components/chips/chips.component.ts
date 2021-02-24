@@ -1,13 +1,43 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-chips',
   templateUrl: './chips.component.html',
-  styleUrls: ['./chips.component.scss']
+  styleUrls: ['./chips.component.scss'],
+  providers: [
+    {
+      
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ChipsComponent),
+      multi: true
+    }
+  ]
 })
-export class ChipsComponent {
+export class ChipsComponent implements ControlValueAccessor {
 
   public constructor(private elementRef: ElementRef) {}
+
+  //ControlValueAccessor methods
+  public onChange: any;
+  public registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  public registerOnTouched(fn: any): void {}
+  public writeValue(value: Array<string>): void {
+    this.values = value;
+  }
+
+  public get values(): Array<string> {
+    return this.selectedItems;
+  }
+
+  public set values(value: Array<string>) {
+    this.selectedItems = value;
+    if (this.onChange) {
+      this.onChange(value);
+    }
+  }
 
   public items: Array<string> = [
     "Java",
