@@ -1,0 +1,6 @@
+Prerequisites: install angular cli, nodeJS and npm
+
+1. git clone https-link-to-repository
+2. cd into the directory
+3. npm install 
+4. run using -> ng serve open
