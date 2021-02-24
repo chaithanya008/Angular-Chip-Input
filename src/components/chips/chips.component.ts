@@ -156,6 +156,9 @@ export class ChipsComponent implements ControlValueAccessor {
     this.searchResults = this.items.filter(
       (x: string) =>
         x.toLowerCase().startsWith(this.searchText.toLowerCase())
+        // to exclude added results
+        &&
+        !this.selectedItems.includes(x)
     );
   }
 
