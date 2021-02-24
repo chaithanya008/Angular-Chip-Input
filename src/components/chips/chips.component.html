@@ -19,23 +19,35 @@
       </div>
     </div>
     <div class="search-input">
+      <!-- keyboard interactions -->
       <input
         type="text"
         class="search-input__data"
         [(ngModel)]="searchQuery"
         [placeholder]="searchPlaceholder"
+        (keydown.backspace)="removeLastItem()"
+        (keyup.enter)="addCurrentItem()"
+        (focus)="onLocationFocus()"
+        (blur)="onLocationBlur()"
+        (keydown.ArrowUp)="onArrowUp()"
+        (keydown.ArrowDown)="onArrowDown()"
       />
     </div>
   </div>
 
   <!-- suggestion element -->
   <div *ngIf="searchResults.length > 0" class="search__panel">
-    <div
-      *ngFor="let item of searchResults"
-      class="result-item"
-      (click)="addItem(item)"
-    >
-      {{ item }}
-    </div>
+    <ul role="listbox" class="result-items">
+      <li
+        #element
+        *ngFor="let item of searchResults; let i = index"
+        tabIndex="{{ i }}"
+        class="result-item"
+        [ngClass]="{ 'result-item--focus': focusElement == element.tabIndex }"
+        (click)="addItem(item)"
+      >
+        {{ item }}
+      </li>
+    </ul>
   </div>
 </div>

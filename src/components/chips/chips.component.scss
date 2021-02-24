@@ -73,6 +73,10 @@
   }
 }
 
+.result-items {
+  padding: 0;
+}
+
 .result-item {
   display: flex;
   padding: 10px;
@@ -80,9 +84,9 @@
   height: 10px;
   cursor: pointer;
 
-  &:focus {
+  // modifier of result-item to add focus effect
+  &--focus {
     background-color: #c8c8c8;
-    outline: none;
   }
 
   &:hover {

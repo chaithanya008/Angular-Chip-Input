@@ -66,6 +66,10 @@ export class ChipsComponent implements ControlValueAccessor {
   public searchResults: Array<string> = [];
   public selectedItems: Array<string> = [];
 
+  // index to track the focussed element
+  // in search results
+  public focusElement: number = -1;
+
   public get searchPlaceholder(): string {
     return this.searchText ? "" : "Type a Programming Language";
   }
@@ -100,6 +104,50 @@ export class ChipsComponent implements ControlValueAccessor {
     );
     if (index !== -1) {
       this.selectedItems.splice(index, 1);
+      this.focusInput();
+    }
+  }
+  
+/////////////////////////
+//////
+// functions for keyboard interactions
+//////
+/////////////////////////
+
+  public onLocationFocus(): void {
+    this.focusElement = 0;
+  }
+  
+  public onLocationBlur(): void {
+    this.focusElement = -1;
+  }
+
+  public onArrowUp(): void {
+    if (this.focusElement > 0) {
+      this.focusElement--;
+    }
+  }
+
+  public onArrowDown(): void {
+    // check if end of results is reached
+    if (this.focusElement <= this.searchResults.length - 2) {
+      this.focusElement++;
+    } else {
+      // set focus to the first element upon reaching the end
+      this.focusElement = 0; 
+    }
+  }
+
+  public addCurrentItem(): void {
+    if (this.focusElement >= 0) {
+      const currrentItem: string = this.searchResults[this.focusElement];
+      this.addItem(currrentItem);
+    }
+  }
+
+  public removeLastItem(): void {
+    if (!this.searchText) {
+      this.selectedItems.splice(-1, 1);
       this.focusInput();
     }
   }
